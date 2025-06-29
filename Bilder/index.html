@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NatureNGO</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        body{
+            margin: 0;
+            font
+            
+        }
+
+
+
+
+        .header-image{
+            height:100vh;
+            width: 100%;
+            object-fit: cover;
+            filter:brightness(0.5);
+            
+        }
+
+        .logo{
+            position: relative;
+            left: 110px;
+        }
+
+        
+
+        .container{
+            
+            position: absolute;
+            right: 32px;
+            top: 16px;
+            left: 32px;
+            font-size:20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .menu-link{
+            color:white;
+            text-decoration: none;
+            margin-left: 16px;
+            
+            
+        }
+
+        .menu-link:hover{
+            color: bisque;
+            
+        }
+
+        .headline{
+            position: absolute;
+            left: 30px;
+            top: 150px;
+            color: white;
+            font-size: 60px;
+            text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .footprint{
+            color: rgb(red, green, blue);
+        }
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -250px;           /* außerhalb des Bildschirms */
+  width: 250px;
+  height: 100%;
+  background: #f9fafb;
+  overflow-x: hidden;
+  transition: left 0.3s ease;
+  padding-top: 60px;      /* Platz für den Close-Button */
+  box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+  z-index: 100;
+  
+}
+
+/* Wenn offen */
+.sidebar.open {
+  left: 0;
+}
+
+/* Links in der Sidebar */
+.sidebar a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #111827;
+}
+.sidebar a:hover {
+  background: #e5e7eb;
+}
+
+/* Close-Button oben rechts in der Sidebar */
+.closebtn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Öffnen-Button */
+.openbtn {
+  position: absolute;
+  top: 42px;
+  left: 20px;
+  font-size: 24px;
+  background: none;
+  color: #fff;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 101;
+}
+.table-overlay {
+  position: absolute;
+  top: 270px;           /* Höhe: Headline top (200px) + Headline‐Höhe (~60px) + etwas Abstand */
+  left: 30px;           /* passt zu deinem Headline-left */
+  right: 32px;          /* oder ein fester Wert */
+  z-index: 2;           /* über dem Bild, aber unter der Sidebar/Menu */
+  background: rgb(255, 255, 255, 0.8); /* halbtransparenter Hintergrund, damit man Text gut liest */
+  padding: 1rem;
+  border-radius: 4px;
+  max-height: calc(100vh - 310px); /* Viewport-Höhe minus Abstand über der Tabelle */
+  overflow-y: auto;   
+}
+#co2Table td {
+  color:black;
+}
+
+.site-footer {
+  background: rgba(255,255,255,0.9);
+  color: #555;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.85rem;
+  position: relative;    /* oder fixed, wenn der Footer immer unten im Viewport bleiben soll */
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+}
+
+.site-footer a {
+  color: #111827;
+  text-decoration: none;
+  margin: 0 0.5rem;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+        
+
+   </style>
+<!-- DataTables CSS -->
+<link
+  rel="stylesheet"
+  href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.min.css"
+/>
+
+<!-- jQuery (Erforderlich für DataTables) -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+
+
+</head>
+
+<body>
+   
+   
+   
+    <button class="openbtn" onclick="openNav()">☰ Menu</button>
+
+    <div id="mySidebar" class="sidebar">
+        <button class="closebtn" onclick="closeNav()">×</button>
+        <a href="#">Home</a>
+        <a href="#">Kontakt</a>
+        <a href="#">Impressum</a>
+    </div>
+
+    <img class ="header-image"src="/Bilder/Background.jpg">
+
+
+ 
+    <div class ="container">
+        <img class="logo" src="/Bilder/9e1aXU-LogoMakr.webp" >
+        <div>
+
+         <a class="menu-link" href >Home</a>
+         <a class="menu-link" href="">Kontakt</a>
+         <a class="menu-link" href="">Impressum</a>
+    
+        </div>
+
+    
+    </div>
+
+
+
+   
+<h1 class = "headline">Co2-<span class ="footprint">Footprint</span></h1>
+
+<div class ="table-overlay">
+  <table id="co2Table" class="display" style="width:100%">
+    <thead>
+      <tr>
+        <th>Land</th>
+        <th>Unternehmen</th>
+        <th>Emissionen (Mt)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Deutschland</td><td>Volkswagen</td><td>105</td></tr>
+      <tr><td>USA</td><td>ExxonMobil</td><td>150</td></tr>
+      <tr><td>China</td><td>State Grid</td><td>200</td></tr>
+      <tr><td>Deutschland</td><td>BASF</td><td>80</td></tr>
+      <tr><td>UK</td><td>BP</td><td>120</td></tr>
+      <tr><td>Frankreich</td><td>ArcelorMittal</td><td>95</td></tr>
+<tr><td>Japan</td><td>Toyota</td><td>90</td></tr>
+<tr><td>Russland</td><td>Gazprom</td><td>160</td></tr>
+<tr><td>Brasilien</td><td>Petrobras</td><td>70</td></tr>
+<tr><td>Kanada</td><td>Suncor</td><td>60</td></tr>
+<tr><td>Australien</td><td>BHP</td><td>110</td></tr>
+<tr><td>Südkorea</td><td>Samsung</td><td>50</td></tr>
+<tr><td>Saudi-Arabien</td><td>Aramco</td><td>210</td></tr>
+<tr><td>Südafrika</td><td>Sasol</td><td>55</td></tr>
+<tr><td>Mexiko</td><td>PEMEX</td><td>65</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<footer class="site-footer">
+  <p>© 2025 NatureNGO. Alle Rechte vorbehalten.  
+     <a href="/impressum">Impressum</a> | 
+     <a href="/datenschutz">Datenschutzerklärung</a>
+  </p>
+</footer>
+<script>
+  function openNav() {
+    document.getElementById("mySidebar").classList.add("open");
+    document.querySelector(".openbtn").style.display = "none"; 
+  }
+  function closeNav() {
+    document.getElementById("mySidebar").classList.remove("open");
+    document.querySelector(".openbtn").style.display = "block";  // wieder zeigen
+  }
+</script>
+
+
+ <script>
+  $(document).ready(function () {
+    $('#co2Table').DataTable({
+      // Optional: Deutsche Sprachdatei, wenn gewünscht:
+      language: {
+        url: 'https://cdn.datatables.net/plug-ins/1.13.5/i18n/de-DE.json'
+      },
+      // Optional: Standard-Sortierung nach Land, dann Emissionen
+      order: [[0, 'asc'], [2, 'desc']]
+    });
+  });
+    function escapeHTML(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+const safe = escapeHTML(userInput);
+inputElement.setAttribute('value', safe);
+</script>
+
+
+
+   
+    
+   </body>
+
+</html>
